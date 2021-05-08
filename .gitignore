@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+/.vs
+/ValorCardinalPortugal/x64/Debug
+/ValorCardinalPortugal/ValorCardinalPortugal.vcxproj.filters
+/ValorCardinalPortugal/ValorCardinalPortugal.vcxproj.user
+/x64/Debug
+/Debug
