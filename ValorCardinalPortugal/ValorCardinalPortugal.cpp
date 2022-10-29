@@ -343,17 +343,19 @@ string ValorCardinalPortugal::AdicionaSufixoDeGrupoMil(const string &valor, int 
 
             resultado += " " + CARDINAL_GRUPOS_SINGULAR[nivel];
         }
-        else if (valor == CARDINAL_DOIS)
-        {
-            if (CARDINAL_GRUPOS_MASCULINO[nivel])
-                resultado = CARDINAL_DOIS;
-            else
-                resultado = CARDINAL_DUAS;
-
-            resultado += " " + CARDINAL_GRUPOS_PLURAL[nivel];
-        }
         else
-            resultado = valor + " " + CARDINAL_GRUPOS_PLURAL[nivel];
+            if (valor == CARDINAL_DOIS)
+            {
+                if (CARDINAL_GRUPOS_MASCULINO[nivel])
+                    resultado = CARDINAL_DOIS;
+                else
+                    resultado = CARDINAL_DUAS;
+
+                resultado += " " + CARDINAL_GRUPOS_PLURAL[nivel];
+            }
+            else
+                resultado = valor + " " + CARDINAL_GRUPOS_PLURAL[nivel];
+
         break;
     }
 
@@ -406,17 +408,19 @@ string ValorCardinalPortugal::FormataValor(const string &valor)
     size_t pos = valor.find('.');
     if (pos == string::npos)
         result += ".00";
-    else if (pos == 0)
-        result = "0" + result;
+    else
+        if (pos == 0)
+            result = "0" + result;
 
     pos = result.find('.');
     size_t rlen = result.length() - pos;
     if (rlen == 1)
         result += "00";
-    else if (rlen == 2)
-        result += "0";
     else
-        result = result.substr(0, pos + 3);
+        if (rlen == 2)
+            result += "0";
+        else
+            result = result.substr(0, pos + 3);
 
     return m_utilFunctions.trimString(result);
 }
